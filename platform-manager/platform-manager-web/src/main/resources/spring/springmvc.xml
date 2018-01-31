@@ -21,6 +21,12 @@
  	<!-- 2 springmvc注解驱动 -->
  	<mvc:annotation-driven />
  	
+ 	<mvc:default-servlet-handler />
+ 	<!-- 不拦截静态资源 -->
+ 	<mvc:resources location="/js/" mapping="/js/**" />
+ 	<mvc:resources location="/css/" mapping="/css/**" />
+ 	<mvc:resources location="/image/" mapping="/image/**" />
+ 	
  	<!-- 3 配置视图解析器 -->
  	<bean 
  		class="org.springframework.web.servlet.view.InternalResourceViewResolver"> 
@@ -28,10 +34,7 @@
  		<property name="suffix" value=".jsp" />
  	</bean>
  	
- 	<!-- 不拦截静态资源 -->
- 	<mvc:resources location="/js/" mapping="/js/**" />
- 	<mvc:resources location="/css/" mapping="/css/**" />
- 	<mvc:resources location="/image/" mapping="/image/**" />
+
  	
  
 </beans>
