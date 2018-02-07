@@ -9,7 +9,6 @@ import com.lanou3g.platform.pojo.SysUser;
  * 
  * @Description 用户业务逻辑
  * @author Denny
- * @date 创建时间：2018年1月30日 上午9:19:58 
  * @version 1.0
  */
 public interface UserService {
@@ -60,4 +59,27 @@ public interface UserService {
 	SysUser  findByParam(SysUser param, int type);
 	
  
+	/**
+	 * 登录
+	 * @param name
+	 * @param pwd
+	 * @return
+	 */
+	SysUser login(String name, String pwd);
+	
+	/**
+	 * 更新状态: 启动
+	 * @param id
+	 * @param state
+	 * @return
+	 */
+	int updateStateStart(Integer[] ids);
+	
+	/**
+	 * 更新状态: 停用
+	 * @param id
+	 * @param state
+	 * @return
+	 */
+	int updateStateStop(Integer[] ids);
 }

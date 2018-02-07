@@ -142,4 +142,14 @@ public class SysMenu {
     public void setUpdateId(Integer updateId) {
         this.updateId = updateId;
     }
+
+	@Override
+	public String toString() {
+		return "SysMenu [id=" + id + ", parentId=" + parentId + ", icon=" + icon + ", name=" + name + ", urlkey="
+				+ urlkey + ", url=" + url + ", status=" + status + ", type=" + type + ", sort=" + sort + ", level="
+				+ level + ", createTime=" + createTime + ", createId=" + createId + ", updateTime=" + updateTime
+				+ ", updateId=" + updateId + "]";
+	}
+    
+    
 }

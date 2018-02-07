@@ -222,4 +222,6 @@ public class SysUser {
     public void setUpdateId(Integer updateId) {
         this.updateId = updateId;
     }
+    
+ 
 }

@@ -92,4 +92,13 @@ public class SysRole {
     public void setRemark(String remark) {
         this.remark = remark == null ? null : remark.trim();
     }
+
+	@Override
+	public String toString() {
+		return "SysRole [id=" + id + ", name=" + name + ", status=" + status + ", sort=" + sort + ", createTime="
+				+ createTime + ", createId=" + createId + ", updateTime=" + updateTime + ", updateId=" + updateId
+				+ ", remark=" + remark + "]";
+	}
+    
+    
 }

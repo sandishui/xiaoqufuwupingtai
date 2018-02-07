@@ -111,7 +111,6 @@ public class UserController {
 	@RequestMapping("/user/delete")
 	@ResponseBody
 	public void delete(@RequestParam(value="ids[]")int[] ids){
-		System.out.println("dddddddddd" + Arrays.toString(ids)  );
 		userService.deleteUser(ids);
 	}
 	
@@ -136,4 +135,23 @@ public class UserController {
 		return "{\"valid\":true}"; // 可用
 	}
 	
+	/**
+	 * 更新状态
+	 * 启用
+	 */
+	@RequestMapping("/user/updateStateStart")
+	@ResponseBody
+	public void updateStateStart(@RequestParam(value="ids[]")Integer[] ids){
+		userService.updateStateStart(ids);
+	}
+	/**
+	 * 更新状态
+	 * 停用
+	 */
+	@RequestMapping("/user/updateStateStop")
+	@ResponseBody
+	public void updateStateStop(@RequestParam(value="ids[]")Integer[] ids){
+		userService.updateStateStop(ids);
+	}
+	 
 }

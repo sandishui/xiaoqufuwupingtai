@@ -137,6 +137,11 @@
       )
   </insert>
   <insert id="insertSelective" parameterType="com.lanou3g.platform.pojo.SysRole" >
+   		<selectKey keyProperty="id" resultType="int" order="AFTER">
+			SELECT LAST_INSERT_ID() 
+		</selectKey>
+   
+   
     insert into sys_role
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -320,4 +325,16 @@
       update_id = #{updateId,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  
+   
+   <!-- 批量删除员工信息 -->
+    <delete id="deleteRole" parameterType="int" >
+        delete from sys_role where id in
+        <foreach item="roleid" collection="array" open="(" separator="," close=")">
+            #{roleid}
+        </foreach>
+    </delete>
+  
+  
 </mapper>

@@ -95,6 +95,34 @@
             }
         }
     }
+    
+    //更新状态
+    function changeState(state){
+    
+    	//定义一个空数组
+		var ids = [];
+
+		// 将获取到数据填充到数组中
+		$("input[name='ids']:checked").each(function(i) {//把所有被选中的复选框的值存入数组
+			ids[i] = $(this).val();
+		});
+		var urlpath = "${pageContext.request.contextPath }/user";
+		if(state == 1){
+			urlpath = urlpath + "/updateStateStart";
+		}else{
+			urlpath = urlpath + "/updateStateStop";
+		}
+		
+		// ajax发送
+		$.ajax({
+			type : 'POST',
+			url : urlpath,
+			data : { "ids[]" : ids },
+			success : function(data) {
+				window.location.reload();
+			}
+		});
+    }
 </script>
 
 </head>
@@ -105,9 +133,13 @@
 			<!--操作-->
 			<span class="input-group col-md-3  navbar-left"
 				style="margin-top: 7px; positon: relative;"> <span
-				class="input-group-btn"> <a href="#" class="btn btn-info"
+				class="input-group-btn"> <a href="javascript:void();" class="btn btn-info"
 					role="button"  onclick="delUser();">删除</a> <a href="/main/user/user-add"
 					class="btn btn-info" role="button" style="margin-left: 10px;">增加</a>
+					<a href="javascript:void();"  onclick="changeState(2);"
+					class="btn btn-info" role="button" style="margin-left: 10px;">停用</a>
+					<a href="javascript:void();"  onclick="changeState(1);"
+					class="btn btn-info" role="button" style="margin-left: 10px;">启用</a>
 			</span>
 			</span>
 
@@ -149,15 +181,15 @@
 					<td>${sysuser.username }</td>
 					<td>${sysuser.tel }</td>
 					<td>${sysuser.email }</td>
-					<td>${sysuser.realname }</td>
+					<td>${sysuser.roles.name }</td>
 					<td><fmt:formatDate value="${sysuser.createTime }"
 							pattern="yyyy-MM-dd HH:mm:ss" /></td>
 					<td><c:choose>
 							<c:when test="${sysuser.state==1 }">
-							 启用
+							<font style="color:blue ">已启用</font>
 						 </c:when>
 							<c:otherwise>
-						 	停用
+						 	<font style="color:red ">已停用	</font>
 						 </c:otherwise>
 						</c:choose></td>
 					<td><a href="/user/predit?id=${sysuser.id  }">修改</a>  </td>

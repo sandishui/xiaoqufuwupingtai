@@ -1,11 +1,16 @@
 package com.lanou.platform;
 
+import java.util.List;
+import java.util.Set;
+
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.lanou3g.platform.common.PageBean;
+import com.lanou3g.platform.pojo.SysRole;
 import com.lanou3g.platform.pojo.SysUser;
+import com.lanou3g.platform.pojo.SysUserExt;
 import com.lanou3g.platform.service.UserService;
 
 
@@ -18,10 +23,17 @@ public class TestUser {
 		ApplicationContext context = new ClassPathXmlApplicationContext(path);
 		UserService bean = context.getBean("userServiceImpl", UserService.class);
 		
-		PageBean findByPage = bean.findUserByPage(1, 10, "a");
+		PageBean findByPage = bean.findUserByPage(1, 10, "2");
 		
 		System.out.println(findByPage.getTotal());
 		System.out.println(findByPage.getRows().size());
+	 
+		List<SysUserExt> rows = (List<SysUserExt>) findByPage.getRows();
+		for (SysUserExt sysUserExt : rows) {
+			SysRole  roles = sysUserExt.getRoles();
+			System.out.println(roles);
+		}
+		
 	}
 	
 	@Test

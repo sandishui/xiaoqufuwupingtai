@@ -49,12 +49,12 @@
 				<ul class="nav navbar-nav navbar-right">
 					<li class="dropdown"><a id="dLabel" type="button"
 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							admin <span class="caret"></span>
+						${userBySession.realname }<span class="caret"></span>
 					</a>
 						<ul class="dropdown-menu" aria-labelledby="dLabel">
 							<li><a href="#"> 个人信息 </a></li>
 						</ul></li>
-					<li><a href="#"><span class="glyphicon glyphicon-off"></span>&nbsp;&nbsp;
+					<li><a href="${pageContext.request.contextPath }/logout"><span class="glyphicon glyphicon-off"></span>&nbsp;&nbsp;
 							退出 </a></li>
 
 				</ul>
@@ -91,10 +91,10 @@
 							<li><a href="/user/userlist" target="frame"> <i
 									class="glyphicon glyphicon-user"></i>用户管理
 							</a></li>
-							<li><a href="http://www.ifeng.com" target="frame"> <i
+							<li><a href="/menu/menulist" target="frame"> <i
 									class="glyphicon glyphicon-th-list"></i>菜单管理
 							</a></li>
-							<li><a href="http://www.163.com" target="frame"> <i
+							<li><a href="/role/rolelist" target="frame"> <i
 									class="glyphicon glyphicon-asterisk"></i>角色管理
 							</a></li>
 						</ul></li>
