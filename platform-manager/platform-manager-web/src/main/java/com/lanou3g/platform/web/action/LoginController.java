@@ -8,6 +8,7 @@ import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +31,16 @@ public class LoginController {
 	 */
 	@RequestMapping("/login")
 	public String login(String username, String password,String imageCode, HttpSession session){
+		// 判断非空
+		if(StringUtils.isBlank(username)
+				|| StringUtils.isBlank(password)
+				|| StringUtils.isBlank(imageCode)){
+			session.setAttribute("error", "参数不能为空");
+			// 重新登录
+			return "index";
+		}
+		
+		 
 		
 		// 获取到验证码
 		String code = (String) session.getAttribute("imageCode");
@@ -43,6 +54,8 @@ public class LoginController {
 			// 重新登录
 			return "index";
 		}
+		
+		
 		
 		// 获取到数据
 		SysUser user = userService.login(username, password);

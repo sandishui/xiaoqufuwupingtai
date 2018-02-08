@@ -34,20 +34,14 @@ public class LoginInterceptor implements HandlerInterceptor {
 		//此处应该到SESSION中获取值
 		HttpSession session = request.getSession();
 		SysUser user= (SysUser) session.getAttribute("userBySession");
-		
-		// 模拟登录
-//		user = new SysUser();
-//		user.setId(11);
-//		session.setAttribute("userBySession", user);
-	
+	 
 		// 直接放行
 		if(user != null ){
 			return true;
  		}
-
+		
 		//不符合条件的，跳转到登录界面  
  		request.getRequestDispatcher("/WEB-INF/jsps/index.jsp").forward(request, response);
-//		response.sendRedirect("/");
 		return false;
 		 
 	}

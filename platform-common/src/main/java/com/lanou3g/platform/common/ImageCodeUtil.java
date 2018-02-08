@@ -20,7 +20,7 @@ import com.sun.image.codec.jpeg.JPEGImageEncoder;
  */
 public final class ImageCodeUtil {
 	
-	private static final char[] chars = {  '2', '3', '4', '5', '6',
+	private static final char[] CHARS = {  '2', '3', '4', '5', '6',
 			'7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'Z' };
 	
 	private static final int SIZE = 4;
@@ -53,13 +53,13 @@ public final class ImageCodeUtil {
 		Random ran = new Random();
 		for (int i = 1; i <= SIZE; i++) {
 			
-			int r = ran.nextInt(chars.length);
+			int r = ran.nextInt(CHARS.length);
 			graphic.setColor(getRandomColor());
 			//粗体加斜体
 			graphic.setFont(new Font(null, Font.BOLD + Font.ITALIC, FONT_SIZE));
-			graphic.drawString(chars[r] + "", (i - 1) * WIDTH / SIZE,
+			graphic.drawString(CHARS[r] + "", (i - 1) * WIDTH / SIZE,
 					HEIGHT-2);
-			sb.append(chars[r]);// 将字符保存
+			sb.append(CHARS[r]);// 将字符保存
 		}
 		// 画干扰线
 		for (int i = 1; i <= LINES; i++) {
