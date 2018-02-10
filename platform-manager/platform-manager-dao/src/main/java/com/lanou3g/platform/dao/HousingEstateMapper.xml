@@ -76,7 +76,7 @@
     <if test="distinct" >
       distinct
     </if>
-    <include refid="Base_Column_List" />
+     id, code, name, quantity, (select area_name from area where  area_code=province_code) as province_code, (select area_name from area where  area_code=city_code) as city_code, address
     from housing_estate
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -240,4 +240,10 @@
       address = #{address,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <delete id="deleteHousingEstate" parameterType="int">
+  	  delete from housing_estate where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+  </delete>
 </mapper>

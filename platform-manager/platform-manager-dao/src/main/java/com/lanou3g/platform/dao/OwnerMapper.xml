@@ -94,6 +94,12 @@
     from owner
     where id = #{id,jdbcType=INTEGER}
   </select>
+    <select id="selectNameByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+     name 
+    from owner
+    where id = #{id,jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from owner
     where id = #{id,jdbcType=INTEGER}

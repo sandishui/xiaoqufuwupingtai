@@ -78,8 +78,11 @@
     <if test="distinct" >
       distinct
     </if>
-    <include refid="Base_Column_List" />
-    from scrap_collector
+   sc.id, sc.name, sex, idCard, tel,concat(a.area_name,'-',c.area_name,'-',he.name) as housing_estate_code, openid, income, create_time
+    from scrap_collector sc
+LEFT JOIN housing_estate he on he.`code`=sc.housing_estate_code
+left join area a on a.area_code=he.province_code
+left join area c on c.area_code=he.city_code
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -89,9 +92,10 @@
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
-    <include refid="Base_Column_List" />
-    from scrap_collector
-    where id = #{id,jdbcType=INTEGER}
+       sc.id, sc.name, sex, idCard, tel,concat(he.province_code,'-',he.city_code,'-',he.code) as housing_estate_code, openid, income, create_time
+    from scrap_collector sc
+LEFT JOIN housing_estate he on he.`code`=sc.housing_estate_code
+    where sc.id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from scrap_collector
@@ -272,4 +276,10 @@
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+   <delete id="deleteById" parameterType="int">
+  	delete * from scrap_collector where id in
+   <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+  </delete>
 </mapper>

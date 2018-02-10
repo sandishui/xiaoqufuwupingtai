@@ -20,6 +20,8 @@ public interface OwnerMapper {
 
     Owner selectByPrimaryKey(Integer id);
 
+    String selectNameByPrimaryKey(Integer id);
+    
     int updateByExampleSelective(@Param("record") Owner record, @Param("example") OwnerExample example);
 
     int updateByExample(@Param("record") Owner record, @Param("example") OwnerExample example);
@@ -27,4 +29,5 @@ public interface OwnerMapper {
     int updateByPrimaryKeySelective(Owner record);
 
     int updateByPrimaryKey(Owner record);
+    
 }

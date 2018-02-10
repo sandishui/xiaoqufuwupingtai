@@ -178,12 +178,4 @@
       menuid = #{menuid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  
-     <!-- 批量删除员工信息 -->
-    <delete id="deleteRoleMenu" parameterType="int" >
-        delete from sys_role_menu where id in
-        <foreach item="roleid" collection="array" open="(" separator="," close=")">
-            #{roleid}
-        </foreach>
-    </delete>
 </mapper>

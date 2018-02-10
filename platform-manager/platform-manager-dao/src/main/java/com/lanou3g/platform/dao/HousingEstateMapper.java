@@ -27,4 +27,6 @@ public interface HousingEstateMapper {
     int updateByPrimaryKeySelective(HousingEstate record);
 
     int updateByPrimaryKey(HousingEstate record);
+    
+    int deleteHousingEstate(int [] id);
 }

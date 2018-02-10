@@ -240,4 +240,11 @@
       dict_name = #{dictName,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+     <!-- 批量删除字典信息 -->
+    <delete id="deleteDict" parameterType="int" >
+        delete from sys_dict where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
 </mapper>

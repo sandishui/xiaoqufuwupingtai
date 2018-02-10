@@ -27,4 +27,6 @@ public interface SysDictMapper {
     int updateByPrimaryKeySelective(SysDict record);
 
     int updateByPrimaryKey(SysDict record);
+    
+    int deleteDict(int [] dictId);
 }

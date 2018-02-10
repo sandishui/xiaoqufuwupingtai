@@ -76,7 +76,7 @@
     <if test="distinct" >
       distinct
     </if>
-    <include refid="Base_Column_List" />
+   id, scrap_code, scrap_name, (select dict_text from sys_dict where dict_option=category )as category, unit, price, score
     from scrap
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -240,4 +240,10 @@
       score = #{score,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <delete id="deleteById" parameterType="int">
+  	delete * from scrap where id in
+   <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+  </delete>
 </mapper>

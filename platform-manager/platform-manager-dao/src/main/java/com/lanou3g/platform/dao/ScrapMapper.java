@@ -27,4 +27,6 @@ public interface ScrapMapper {
     int updateByPrimaryKeySelective(Scrap record);
 
     int updateByPrimaryKey(Scrap record);
+    
+    int deleteById(int [] id);
 }

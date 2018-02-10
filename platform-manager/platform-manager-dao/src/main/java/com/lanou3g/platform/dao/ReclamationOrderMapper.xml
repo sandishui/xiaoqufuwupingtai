@@ -15,6 +15,7 @@
     <result column="rd_status" property="rdStatus" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+     
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -83,7 +84,10 @@
     <if test="distinct" >
       distinct
     </if>
-    <include refid="Base_Column_List" />
+    id, order_no, scrap_code, (select name from owner where  id=owner_id )as owner_id, (select name from scrap_collector where id=sc_id)as sc_id, rd_id, amount, unit, money, 
+    (select dict_text from sys_dict where dict_option=sc_status )as sc_status, 
+    (select dict_text from sys_dict where dict_option=rd_status )as rd_status, 
+    create_time, update_time
     from reclamation_order
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />

@@ -33,6 +33,4 @@ public interface SysRoleMapper {
     int updateByPrimaryKeyWithBLOBs(SysRole record);
 
     int updateByPrimaryKey(SysRole record);
-
-	int deleteRole(int[] id);
 }
