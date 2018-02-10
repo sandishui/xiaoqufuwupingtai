@@ -399,4 +399,17 @@
 	     
 	</select>
  
+ 
+ 	<select id="getByNameOfAdmin" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select * from sys_menu
+	</select>
+	
+	<select id="getByOtherName" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select menu.* from sys_menu menu,sys_role_menu rm,sys_role role,sys_user user 
+		where user.role_id = role.id 
+		and rm.roleid = role.id 
+		and menu.id = rm.menuid 
+		and user.username = #{currentUsername,jdbcType=VARCHAR}
+	</select>
+	
 </mapper>

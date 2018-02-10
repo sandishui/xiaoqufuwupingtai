@@ -41,4 +41,9 @@ public interface SysMenuMapper {
 	 * @return
 	 */
 	List<SysMenuExt> selectAll(String param);
+	
+	List<SysMenu> getByNameOfAdmin(String currentUsername);
+
+	List<SysMenu> getByOtherName(String currentUsername);
+
 }
