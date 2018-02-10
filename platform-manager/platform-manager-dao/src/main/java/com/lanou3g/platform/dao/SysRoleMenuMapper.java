@@ -27,4 +27,6 @@ public interface SysRoleMenuMapper {
     int updateByPrimaryKeySelective(SysRoleMenu record);
 
     int updateByPrimaryKey(SysRoleMenu record);
+    
+    int deleteRoleMenu(int[] id);
 }

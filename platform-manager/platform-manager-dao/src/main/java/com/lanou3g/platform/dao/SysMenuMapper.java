@@ -1,9 +1,13 @@
 package com.lanou3g.platform.dao;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.lanou3g.platform.pojo.SysMenu;
 import com.lanou3g.platform.pojo.SysMenuExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
+import com.lanou3g.platform.pojo.SysMenuExt;
+import com.lanou3g.platform.pojo.SysUserExample;
 
 public interface SysMenuMapper {
     int countByExample(SysMenuExample example);
@@ -27,4 +31,14 @@ public interface SysMenuMapper {
     int updateByPrimaryKeySelective(SysMenu record);
 
     int updateByPrimaryKey(SysMenu record);
+    
+    
+    int deleteMenu(int[] userid);
+    
+	/**
+	 * 查询所有
+	 * @param param
+	 * @return
+	 */
+	List<SysMenuExt> selectAll(String param);
 }
