@@ -2,9 +2,7 @@ package com.lanou3g.platform.web.action;
 
 import java.util.Arrays;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,22 +10,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lanou3g.platform.common.PageBean;
-import com.lanou3g.platform.pojo.SysUser;
-import com.lanou3g.platform.service.UserService;
-
+import com.lanou3g.platform.pojo.Scrap;
+import com.lanou3g.platform.service.ScrapService;
+ 
 /**
  * 
- * @Description 用户控制器
- * @author Denny
- * @date 创建时间：2018年1月30日 上午10:08:24 
+ * @Description 废品控制器
+ * @author Jack
+ * @date 创建时间：2018年2月1日  
  * @version 1.0
  */
 
 @Controller
-public class UserController {
+public class ScrapController {
 
 	@Autowired
-	private UserService userService;
+	private ScrapService scrapService;
  
 	
 	/**
@@ -38,13 +36,13 @@ public class UserController {
 	 * @param model
 	 * @return  
 	 */
-	@RequestMapping("/user/userlist")
+	@RequestMapping("/scrap/scraplist")
 	public String list(@RequestParam(defaultValue="1" ) int currentPage, 
 			@RequestParam(defaultValue="10") int rows, 
 			@RequestParam(defaultValue="")String searchparam, Model model){
  
 		// 1. 调用service
-		PageBean pageBean = userService.findUserByPage(currentPage, rows, searchparam);
+		PageBean pageBean = scrapService.findDictByPage(currentPage, rows, searchparam);
 		
 		// 2. model封装
 		model.addAttribute("pageBean", pageBean);
@@ -52,51 +50,52 @@ public class UserController {
 		model.addAttribute("rows", rows);
 		model.addAttribute("searchparam", searchparam);
 		
-		return "user/user-list";
+		return "scrap/scrap-list";
 	}
-	
+	@RequestMapping("/scrap/toadd")
+	public String toAdd(){ 
+		
+		return "scrap/scrap-add";
+	}
 	/**
-	 * 增加用户
-	 * @param user
-	 * @param password2
+	 * 增加
+	 * @param scrap 
 	 * @return
 	 */
-	@RequestMapping("/user/add")
-	public String add(SysUser user, String password2){
+	@RequestMapping("/scrap/add")
+	public String add(Scrap scrap){
 		// 增加
-		int addUser = userService.addUser(user, password2);
+		int addDict = scrapService.addScrap(scrap);
 		
-		return "redirect:/user/userlist";
+		return "redirect:/scrap/scraplist";
 	}
 	
 	/**
 	 * 修改前
 	 * @return
 	 */
-	@RequestMapping("/user/predit")
+	@RequestMapping("/scrap/predit")
 	public String preEdit(int id, Model model){
-		SysUser user = userService.findById(id);
-		model.addAttribute("user", user);
-		return "user/user-edit";
+		Scrap dict = scrapService.findById(id);
+		model.addAttribute("scrap", dict);
+		return "scrap/scrap-edit";
 	}
 	
 	/**
 	 * 进行修改
-	 * @param user
-	 * @param password2
+	 * @param scrap 
 	 * @return
 	 */
-	@RequestMapping("/user/edit")
-	public String edit(SysUser user, String password2, Model model){
-		userService.updateUser(user, password2);
-		return "redirect:/user/userlist";
-	}
-	
-	@RequestMapping("/user/delete")
+	@RequestMapping("/scrap/edit")
+	public String edit(Scrap  scrap, Model model){
+		scrapService.updateScrap(scrap);
+		return "redirect:/scrap/scraplist";
+	} 
+	@RequestMapping("/scrap/delete")
 	@ResponseBody
 	public void delete(@RequestParam(value="ids[]")int[] ids){
-//		System.out.println("dddddddddd" + Arrays.toString(ids)  );
-		userService.deleteUser(ids);
+		 
+		scrapService.deleteScrap(ids);
 	}
 	
 }

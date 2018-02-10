@@ -36,13 +36,4 @@ public class IndexController {
 		// 如果不为空，返回的是要跳转的页面
 		return mod + "/" + tab;
 	}
-	
- 	/**
- 	 * 没有权限
- 	 * @return
- 	 */
- 	@RequestMapping("/main/no-perm")
- 	public String noPerm(){
- 		return "no-perm";
- 	}
 }
