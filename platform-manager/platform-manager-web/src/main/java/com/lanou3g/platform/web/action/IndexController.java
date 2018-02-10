@@ -37,4 +37,12 @@ public class IndexController {
 		return mod + "/" + tab;
 	}
  
+	/**
+	 * 没有权限
+	 * @return
+	 */
+	@RequestMapping("/main/no-perm")
+	public String noPerm(){
+		return "no-perm";
+	}
 }
