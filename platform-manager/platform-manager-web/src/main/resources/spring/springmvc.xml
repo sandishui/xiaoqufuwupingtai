@@ -36,20 +36,20 @@
  	
 
 	<!--    配置拦截器    -->
-	<mvc:interceptors>
-		<!-- 登录拦截器 -->
+<!-- 	<mvc:interceptors>
+		登录拦截器
 		<mvc:interceptor>
-		<!-- 	拦截路劲 -->
+			拦截路劲
 		<mvc:mapping path="/**"/>
 		<mvc:exclude-mapping path="/"/>
 	    <mvc:exclude-mapping path="/login"/>  
 		<mvc:exclude-mapping path="/createImage"/>
-		<!-- 	指定拦截器 -->
+			指定拦截器
 			<bean class="com.lanou3g.platform.web.interceptor.LoginInterceptor" />
 		</mvc:interceptor>
 		
 	</mvc:interceptors>  
- 	
+ 	 -->
  
 </beans>
 

@@ -9,8 +9,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.lanou3g.platform.common.ImageCodeUtil;
@@ -40,8 +44,6 @@ public class LoginController {
 			return "index";
 		}
 		
-		 
-		
 		// 获取到验证码
 		String code = (String) session.getAttribute("imageCode");
 		// 转换为大小写
@@ -65,8 +67,23 @@ public class LoginController {
 			return "index";
 		}
 		
+	
+		/**
+		 * 使用shiro开始
+		 */
+		UsernamePasswordToken token = new UsernamePasswordToken(username,  DigestUtils.md5DigestAsHex(password.getBytes()) );  
+        token.setRememberMe(true);
+		Subject currentUser = SecurityUtils.getSubject();
+		//在调用了login方法后,SecurityManager会收到AuthenticationToken,并将其发送给已配置的Realm执行必须的认证检查  
+        //每个Realm都能在必要时对提交的AuthenticationTokens作出反应  
+        //所以这一步在调用login(token)方法时,它会走到MyRealm.doGetAuthenticationInfo()方法中,具体验证方式详见此方法 
+		currentUser.login(token);
+		/**
+		 * 使用shiro结束
+		 */
 		// 将对象保存到session中
 		session.setAttribute("userBySession", user); 
+		
 		return "redirect:/main/main/main";
 	}
 	
@@ -99,11 +116,8 @@ public class LoginController {
 	 */
 	@RequestMapping("/logout")
 	public String logout(HttpSession session){
-		if(session!=null){
-  			session.invalidate();
-  			session = null;
-  		}
-		System.out.println("----222");
-		return "redirect:/";
+		SecurityUtils.getSubject().logout(); 
+		return "redirect:/"; //return "login";
 	}
+	 
 }
