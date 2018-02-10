@@ -15,7 +15,6 @@ import com.lanou3g.platform.dao.SysUserMapper;
 import com.lanou3g.platform.pojo.SysUser;
 import com.lanou3g.platform.pojo.SysUserExample;
 import com.lanou3g.platform.pojo.SysUserExample.Criteria;
-import com.lanou3g.platform.pojo.SysUserExt;
 import com.lanou3g.platform.service.UserService;
 
 @Service
@@ -24,7 +23,7 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private SysUserMapper sysUserMapper;
 
-/*	@Override
+	@Override
 	public PageBean findUserByPage(int currentPage, int rows, String param) {
 
 		// 1.定义分页信息
@@ -52,42 +51,6 @@ public class UserServiceImpl implements UserService {
 		pagebean.setRows(list);
 		// 开始的第几条位置
  		pagebean.setStartIdx( (currentPage-1)*rows + 1  );
-		// 结束的第几条位置
-		pagebean.setEndIdx( pagebean.getStartIdx()+pageInfo.getSize() -1);
-		// 总页数
-		int pageCount = (int)(pagebean.getTotal() + rows -1)/ rows ;
-		pagebean.setPageCount(pageCount);
-		
-		return pagebean;
-	}*/
-	@Override
-	public PageBean findUserByPage(int currentPage, int rows, String param) {
-		
-		// 1.定义分页信息
-		PageHelper.startPage(currentPage, rows);
-		// 排序
-		PageHelper.orderBy("id desc");
-		// 2. 定义查询条件
-		SysUserExample example = new SysUserExample();
-		Criteria criteria = example.createCriteria();
-		
-		// 2.1 模糊查询用户名
-		if (StringUtils.isNotBlank(param)) {
-			criteria.andUsernameLike("%"+param+"%");
-		}
-		
-		// 3. 进行查询 并返回
-		List<SysUserExt> list = sysUserMapper.selectAll(example);
-		
-		// 4.定义PageInfo
-		PageInfo<SysUserExt> pageInfo = new PageInfo<>(list);
-		
-		// 5. 定义PageBean
-		PageBean pagebean = new PageBean();
-		pagebean.setTotal(pageInfo.getTotal());
-		pagebean.setRows(list);
-		// 开始的第几条位置
-		pagebean.setStartIdx( (currentPage-1)*rows + 1  );
 		// 结束的第几条位置
 		pagebean.setEndIdx( pagebean.getStartIdx()+pageInfo.getSize() -1);
 		// 总页数
@@ -148,7 +111,7 @@ public class UserServiceImpl implements UserService {
 		// 条件
 		SysUserExample example = new SysUserExample();
 		Criteria criteria = example.createCriteria();
-		criteria.andIdEqualTo( user.getId());
+		criteria.andIdEqualTo(user.getId());
 		
 		// 更新数据
 		// ---更新者
@@ -166,70 +129,8 @@ public class UserServiceImpl implements UserService {
 	public SysUser findById(int id) {
 		return sysUserMapper.selectByPrimaryKey(id);
 	}
-
-	@Override
-	public SysUser findByParam(SysUser user, int type){
-		
-		// 1 定义条件
-		SysUserExample example = new SysUserExample();
-		Criteria criteria = example.createCriteria();
-		
-		if(type == 1){
-			// 用户名
-			criteria.andUsernameEqualTo(user.getUsername());
-		} else if(type == 2){
-			// 电话
-			criteria.andTelEqualTo(user.getTel());
-		} else if( type==3){
-			// 邮箱
-			criteria.andEmailEqualTo(user.getEmail());
-		}
-
-		// 2 查找
-		List<SysUser> list = sysUserMapper.selectByExample(example);
-		
-		// 3 返回
-		if(list!=null && list.size() >0){
-			return list.get(0);
-		}
-		
-		return null;
-	}
  
-	@Override
-	public SysUser login(String name, String pwd){
-		
-		// 1.定义对象
-		SysUser user = new SysUser();
-		user.setUsername(name);
-		
-		// 2.判断用户是否存在
-		SysUser sysUser = findByParam(user, 1);
-		
-		 if(sysUser == null){
-			 // 证明用户不存在
-			 return null;
-		 }
-		 
-		// 3. 判断密码是否一致
-		if(!DigestUtils.md5DigestAsHex(pwd.getBytes()  )
-				.equals(sysUser.getPassword())){
-			return null;
-		}
-		
-		return sysUser;
-	}
-
-	@Override
-	public int updateStateStart(Integer[] ids) {
-		 
-		return sysUserMapper.updateStateStart(ids);
-	}
-
-	@Override
-	public int updateStateStop(Integer[] ids) {
-		return sysUserMapper.updateStateStop(ids);
-	}
 	
-	 
+	
+	
 }
