@@ -82,4 +82,6 @@ public interface UserService {
 	 * @return
 	 */
 	int updateStateStop(Integer[] ids);
+
+ 
 }

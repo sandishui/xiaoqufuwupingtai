@@ -224,6 +224,17 @@ public class MenuServiceImpl implements MenuService {
 		return new ArrayList<SysMenu>();
 	}
 
+	@Override
+	public List<SysMenu> getByUsername(String currentUsername) {
+		List<SysMenu> menus = new ArrayList<SysMenu>();
+		if(currentUsername.equals("admin")){
+			menus = sysMenuMapper.getByNameOfAdmin(currentUsername);
+		}else{
+			menus = sysMenuMapper.getByOtherName(currentUsername);
+		}
+		return menus;
+	}
+
 	
 	
 }

@@ -64,5 +64,12 @@ public interface MenuService {
 	 * @return
 	 */
 	List<SysMenu>  findAll(int  parentId);
+
+	/**
+	 * 根据名称获取到Menu
+	 * @param currentUsername
+	 * @return
+	 */
+	List<SysMenu> getByUsername(String currentUsername);
  
 }
