@@ -104,7 +104,7 @@
 					</a>
 						<ul id="scrapManager" class="nav nav-list collapse secondmenu"
 							style="height: 0px;">
-							<li><a href="http://www.baidu.com" target="frame"> <i
+							<li><a href="/scrap/scraplist" target="frame"> <i
 									class="glyphicon glyphicon-user"></i> 废品管理
 							</a></li>
 						</ul></li>
@@ -114,8 +114,11 @@
 					</a>
 						<ul id="scraperManager" class="nav nav-list collapse secondmenu"
 							style="height: 0px;">
-							<li><a href="http://www.baidu.com" target="frame"> <i
+							<li><a href="/scrapCollector/scrapCollectorList" target="frame"> <i
 									class="glyphicon glyphicon-user"></i>废品回收员管理
+							</a></li>
+							<li><a href="/reclamationorder/reclamationorderlist" target="frame"> <i
+									class="glyphicon glyphicon-user"></i>废品回收订单查询
 							</a></li>
 						</ul></li>
 					<li><a href="#ownerManager" class="nav-header collapsed"
@@ -124,7 +127,7 @@
 					</a>
 						<ul id="ownerManager" class="nav nav-list collapse secondmenu"
 							style="height: 0px;">
-							<li><a href="http://www.baidu.com" target="frame"> <i
+							<li><a href="/owner/ownerlist" target="frame"> <i
 									class="glyphicon glyphicon-user"></i>业主管理
 							</a></li>
 						</ul></li>
@@ -134,7 +137,7 @@
 					</a>
 						<ul id="villageManager" class="nav nav-list collapse secondmenu"
 							style="height: 0px;">
-							<li><a href="http://www.baidu.com" target="frame"> <i
+							<li><a href="/housingEstate/housingEstateList" target="frame"> <i
 									class="glyphicon glyphicon-user"></i>小区管理
 							</a></li>
 						</ul></li>
@@ -147,7 +150,7 @@
 							<li><a href="http://www.baidu.com" target="frame"> <i
 									class="glyphicon glyphicon-user"></i>系统设置
 							</a></li>
-							<li><a href="http://www.baidu.com" target="frame"> <i
+							<li><a href="/dict/dictlist" target="frame"> <i
 									class="glyphicon glyphicon-user"></i>数据字典
 							</a></li>
 							<li><a href="http://www.baidu.com" target="frame"> <i
