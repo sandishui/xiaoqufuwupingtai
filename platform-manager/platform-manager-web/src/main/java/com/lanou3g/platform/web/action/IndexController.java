@@ -38,7 +38,7 @@ public class IndexController {
 	}
 	
  	/**
- 	 * 没有权限
+ 	 * 没有权限1
  	 * @return
  	 */
  	@RequestMapping("/main/no-perm")
